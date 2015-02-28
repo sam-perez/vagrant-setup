@@ -17,11 +17,11 @@ package 'postgresql-contrib'
 execute 'createuser' do
   guard = <<-EOH
     psql -U postgres -c "select * from pg_user where
-    usename='default'" |
-    grep -c default
+    usename='rails'" |
+    grep -c rails
   EOH
 
   user 'postgres'
-  command "psql -c \"create role default with createdb login password 'password'\""
+  command 'psql -c "create role rails with createdb login password \'password\'"'
   not_if guard, user: 'postgres'
 end
