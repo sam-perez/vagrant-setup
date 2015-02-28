@@ -6,6 +6,20 @@
 #
 
 #
+# Add brightbox ruby repo.
+#
+execute 'apt-add-repository ppa:brightbox/ruby-ng -y' do
+  not_if 'which ruby | grep -c 2.1'
+end
+
+#
+# Update dependencies.
+#
+execute 'apt-get update' do
+  ignore_failure true
+end
+
+#
 # Install Ruby Build Dependencies
 #
 package 'libxslt-dev'
@@ -19,19 +33,6 @@ package 'libsqlite3-dev'
 #
 package 'software-properties-common'
 
-#
-# Add brightbox ruby repo.
-#
-execute 'apt-add-repository ppa:brightbox/ruby-ng -y' do
-  not_if 'which ruby | grep -c 2.1'
-end
-
-#
-# Update dependencies.
-#
-execute 'apt-get update' do
-  ignore_failure true
-end
 
 #
 # Install Ruby 2.1
