@@ -17,11 +17,11 @@ package 'postgresql-contrib'
 execute 'createuser' do
   guard = <<-EOH
     psql -U postgres -c "select * from pg_user where
-    usename='rails'" |
-    grep -c rails
+    usename='django'" |
+    grep -c django
   EOH
 
   user 'postgres'
-  command 'psql -c "create role rails with createdb login password \'password\'"'
+  command 'psql -c "create role django with createdb login password \'password\'"'
   not_if guard, user: 'postgres'
 end
