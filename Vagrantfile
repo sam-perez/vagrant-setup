@@ -4,7 +4,7 @@ Vagrant.configure('2') do |config|
 
   config.vm.network :private_network, type: 'dhcp'
   config.vm.network :forwarded_port, guest: 3000, host: 3000
-  config.vm.synced_folder './code', '/home/vagrant/code'
+  config.vm.synced_folder './code', '/home/vagrant/code', nfs: true, mount_options: ['actimeo=2']
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ['chef/cookbooks']
